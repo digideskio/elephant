@@ -41,7 +41,7 @@ public class ProxyWebSocketServlet extends WebSocketServlet {
     // This will be a helpful block to refer to when people
     // freak out when I tell them how this works.
     if(!("irc.collapse.io".equals(host))
-        || (6669 != port && 6697 != port)) {
+        || (6697 != port && 6667 != port)) {
       System.err.println("Invalid host or port: " + host + ":" + port);
       return null;
     }

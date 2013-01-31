@@ -19,7 +19,7 @@
                name:     'Carl Sagan',
                autoJoin: ['#elephant']
              },
-        proxyURI: 'ws://collapse.io:8080/proxy'
+        proxyURI: 'ws://192.168.11.47:8080/proxy'
         // proxyURI: 'ws://localhost:8080/proxy'
     }, options);
 
