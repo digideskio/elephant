@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <meta name="language" content="en/US" />
+    <title>Elephant IRC</title>
+    <link rel="stylesheet" type="text/css"  href="css/vendor/reset-fonts-grids.css" />
+    <style>
+      body { display: none; }
+    </style>
+    <link rel="stylesheet/less" href="css/style.less" type="text/css" />
+    <link rel="stylesheet/less" href="css/theme.less" type="text/css" />
+    <script type="text/javascript" data-main="js/main.js" src="js/vendor/allplugins-require.js"></script>
+  </head>
+  <body>
+    <script id="dockBadge" type="text/text"></script>
+    <img id="growlIcon" src="img/elephantIcon.png" class="hidden" />
+
+    <!-- a channel list item -->
+    <script id="tmplChannelListItem" type="text/x-query-tmpl">
+      <li data-channel="${ channel.name }">
+        ${ channel.prettyName }
+      </li>
+    </script>
+
+    <!-- mentions are replaced with more info -->
+    <script id="tmplNick" type="text/x-query-tmpl">
+      <span class="nick" data-nick="${ nick }">${ nick }</span>
+    </script>
+
+    <!-- a nick in the list of available people -->
+    <script id="tmplNickListItem" type="text/x-query-tmpl">
+      <li><span class="nick" data-nick="${ nick }">${ nick }</span></li>
+    </script>
+
+    <!-- private message in a chat -->
+    <script id="tmplPrivMsg" type="text/x-query-tmpl">
+      <div class="privmsg" data-from="${ from }">
+        <div class="nick" data-nick="${ from }">${ from }</div>
+        <div class="timestamp timeago" title="${ time }"></div>
+        <div class="message">${ message }</div>
+      </div>
+    </script>
+
+    <!-- an IRC channel -->
+    <script id="tmplChannel" type="text/x-jquery-template">
+        <section class="channel hidden"
+                 data-channel="${ channel.name }"
+                 data-server="">
+        <header>
+            <div class="topic hidden" contenteditable="true"
+                 data-setby=""
+                 data-setat="">
+            </div>
+        </header>
+        <div class="consumeAvailableHeight chat"></div>
+        <div class="status">
+            <label class="info channelName">${ channel.name }</label>
+            <label for="focusable_${ channel.prettyName }" class="info memberCount clickable"></label>
+            <input id="focusable_${ channel.prettyName }" class="focusable" type="text" id="focusable"
+                value="this is a hack that allows me to use the :focus selector" />
+            <div class="peopleList">
+                <ul></ul>
+                <!--<span class="arrow"></span>-->
+            </div>
+        </div>
+        <div class="input" contenteditable="true"></div>
+      </section>
+    </script>
+
+    <section id="config">
+      <label for="name">Name</label>
+      <input id="name" class="property" type="text" placeholder="" />
+
+      <label for="nicks" title="Comma separated list">Nick(s)</label>
+      <input id="nicks" class="property" type="text" placeholder="" />
+
+      <label for="autojoin" title="Comma separated list">Auto Join Channels</label>
+      <input id="autojoin" class="property" type="text" placeholder="" />
+
+      <label for="host">Host</label>
+      <input id="host" class="property" type="text" placeholder="" />
+
+      <label for="port">Port</label>
+      <input id="port" class="property" type="text" placeholder="" />
+
+      <label for="password">Password</label>
+      <input id="password" class="property" type="password" value="" />
+
+      <input type="button" id="connect" value="Connect" />
+    </section>
+
+    <ul id="channelList"></ul>
+    <div id="channels"></div>
+  </body>
+</html>

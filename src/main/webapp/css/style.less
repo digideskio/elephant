@@ -1,0 +1,216 @@
+@import "definitions.less";
+
+@sizePadding: 6px;
+@sizeNickWidth: 80px;
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: inherit;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  height: 100%;
+  width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.hidden {
+   display: none;
+}
+
+.clickable {
+  cursor: pointer;
+  .noSelect();
+}
+
+
+#config {
+  margin: auto;
+  margin-top: 100px;
+  width: 200px;
+
+  label, input {
+    display: block;
+  }
+
+  label {
+    font-size: 12pt;
+  }
+
+  input {
+    border: none;
+    padding: 4px;
+    margin-bottom: 20px;
+    width: 200px;
+    font-size: 12pt;
+  }
+
+  button {
+    border: none;
+    padding: 4px;
+  }
+
+}
+
+#channelList {
+  position: fixed;
+  right: 0;
+  top: 80px;
+
+  li {
+    text-align: center;
+    .fixedWidthNoWrap(80px, 30px);
+    .rotate(90deg);
+    .roundedCorners(3px);
+    margin-bottom: 70px;
+    position: relative;
+    left: 30px;
+    padding: 1px 3px 1px 3px;
+    opacity: 0.2;
+    .fTransition(opacity 200ms ease-in);
+    cursor: pointer;
+  }
+
+  li.highlight {
+    opacity: 1.0;
+  }
+
+  li.active {
+  }
+}
+
+#channelList:hover li {
+  opacity: 1.0;
+  .fTransition(opacity 200ms ease-in);
+}
+
+.channel {
+  display: table;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  header {
+    padding: @sizePadding;
+    .topic {
+    }
+
+    .topic:focus {
+      outline: none;
+    }
+  }
+
+  .chat {
+    box-sizing: border-box;
+    min-height: 20px;
+    padding: @sizePadding;
+    overflow: auto;
+    overflow-x: hidden;
+
+    height: 100%;
+
+    .privmsg:hover .timestamp {
+        opacity: 1.0;
+        z-index: 10;
+        .fTransition(opacity 200ms ease-in);
+    }
+
+    .privmsg.followup {
+        margin-top: 0px;
+        >.nick {
+            display: none;
+        }
+
+        .timestamp {
+            display: none;
+        }
+    }
+
+    .privmsg:not(:first-child):not(.followup) {
+        margin-top: 10px;
+    }
+
+    .privmsg {
+
+        >.nick {
+            display: inline-block;
+            // .fixedWidthNoWrap(80px, 80px);
+        }
+
+        .timestamp {
+            display: inline-block;
+            opacity: 0.0;
+            .fTransition(opacity 200ms ease-in);
+            cursor: default;
+            padding-left: 30px;
+        }
+
+        .message {
+            display: block;
+            min-width: 100px;
+            padding-left: 15px;
+
+            .autoImage {
+                border: none;
+                max-height: 300px;
+                max-width: 300px;
+                display: block;
+                .roundedCorners(2px);
+                padding: 5px 0 5px 0;
+            }
+        }
+    }
+  }
+
+  .status {
+    padding: 1px @sizePadding 1px @sizePadding;
+    position: relative;
+
+    .info {
+      padding-right: 10px;
+    }
+
+    .peopleList {
+      .roundedCorners(4px);
+      position: absolute;
+      bottom: 20px;
+      left: 40px;
+      min-width: 100px;
+      min-height: 50px;
+      max-height: 400px;
+      overflow: auto;
+      opacity: 0.0;
+      display: none;
+      .fBubble(1px solid #aaa, #aaa);
+     .fTransition(opacity 200ms ease-in);
+    }
+
+    .focusable {
+      opacity: 0.0;
+      position: absolute;
+    }
+
+    .focusable:focus + .peopleList {
+      opacity: 1.0;
+      display: inherit;
+     .fTransition(opacity 200ms ease-in);
+    }
+  }
+
+  .input {
+    height: 20px;
+    padding: @sizePadding;
+    cursor: text;
+  }
+  .input:focus {
+    outline: none;
+  }
+}
